@@ -1,0 +1,10 @@
+outage_id,town,start_time,end_time,customers_affected,cause,status
+1001,Hicksville,2026-11-21 06:12,2026-11-21 08:45,1240,Fiber cut from construction,Resolved
+1002,Levittown,2026-11-21 07:30,,860,Power failure at hub site,Ongoing
+1003,Massapequa,2026-11-21 09:05,2026-11-21 09:50,310,Equipment reboot,Resolved
+1004,Garden City,2026-11-21 10:15,,2100,Under investigation,Ongoing
+1005,Freeport,2026-11-21 11:40,2026-11-21 14:20,540,Storm damage to line,Resolved
+1006,Huntington,2026-11-21 13:00,,95,Scheduled maintenance,Ongoing
+1007,Hicksville,2026-11-21 15:25,2026-11-21 16:05,180,Fiber cut from construction,Resolved
+1008,Valley Stream,2026-11-21 17:50,,1475,Power failure at hub site,Ongoing
+1009,Plainview,2026-11-21 18:10,,2027,Storm Damage,Ongoing
