@@ -58,3 +58,4 @@ python3 outage_summary.py sample_outages.csv > status.txt
 - Return structured JSON (using a JSON schema) so the summaries can be loaded into a database or dashboard
 - Run it on a schedule (cron or Airflow) against live data
 - Add an executive-summary audience
+# outage-summarizer
