@@ -52,6 +52,7 @@ python3 outage_summary.py sample_outages.csv > status.txt
 - **Accuracy.** The prompts tell the model not to invent details such as restoration times. I checked the output totals and durations against the source data, and the model also flagged an inconsistently capitalized cause value ("Storm Damage") as a possible data-entry issue.
 - **Thinking blocks.** The model can return a thinking block before its answer, so the script keeps only the text blocks of the reply.
 - **Cost and safety.** It uses Claude Haiku 5.5, the lowest-cost model; one run costs a fraction of a cent. `max_tokens` caps the cost of each call. The API key comes from the environment and is never stored in the repository.
+- **Durations are calculated in Python and passed to the model, which is told not to do its own arithmetic: code handles exact math, the LLM handles the writing.
 
 ## Possible next steps
 
