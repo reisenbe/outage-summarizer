@@ -17,6 +17,7 @@ import os
 import sys
 
 import anthropic
+from datetime import datetime
 
 # Cheapest current Claude model -- plenty for summarizing a small table.
 MODEL = "claude-haiku-5-5"
@@ -43,8 +44,7 @@ Write a concise technical summary:
 1. Totals: ongoing vs. resolved outages, customers currently affected.
 2. Ongoing outages ordered by customers affected (largest first), with outage_id, town, start time, and cause.
 3. Patterns worth attention: repeated causes or repeated towns.
-4. For resolved outages, the duration of each.
-Be precise and brief. Do not invent details that are not in the data.""",
+4. For resolved outages, the duration from the duration_minutes column, shown as hours and minutes. Do not calculate durations yourself.""",
 }
 
 
@@ -60,7 +60,14 @@ def build_prompt(rows, audience):
 {data}
 </outages>"""
 
-
+def add_durations(rows):
+    for row in rows:
+        if row["end_time"]:  # resolved: has an end time
+            start = datetime.strptime(row["start_time"], "%Y-%m-%d %H:%M")
+            end = datetime.strptime(row["end_time"], "%Y-%m-%d %H:%M")
+            row["duration_minutes"] = str(int((end - start).total_seconds() / 60))
+        else:  # ongoing: blank end time
+            row["duration_minutes"] = ""
 def main():
     if len(sys.argv) not in (2, 3):
         sys.exit(f"Usage: {sys.argv[0]} <outages.csv> [{'|'.join(INSTRUCTIONS)}]")
@@ -74,6 +81,7 @@ def main():
         sys.exit("ANTHROPIC_API_KEY is not set. Add it to your shell profile and open a new terminal.")
 
     rows = read_outages(sys.argv[1])
+    add_durations(rows)
     if not rows:
         sys.exit("No outage records found in the file.")
 
